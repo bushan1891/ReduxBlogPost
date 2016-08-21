@@ -3,13 +3,20 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 
-import App from './components/app';
+import { Router , browserHistory} from 'react-router';
+import routes from './routes';
+// router controlls what is going to display
+// browserHistory watchs for url change
+//www.blog.post/detail -> www.blog.post/detail/post
+// hashHistory looks for changes for hash changes   www.blog.post/#detail
+// memoryHistory is not used for url changes
 import reducers from './reducers';
+
 
 const createStoreWithMiddleware = applyMiddleware()(createStore);
 
 ReactDOM.render(
   <Provider store={createStoreWithMiddleware(reducers)}>
-    <App />
+    <Router history={browserHistory} routes={routes}/>
   </Provider>
   , document.querySelector('.container'));
